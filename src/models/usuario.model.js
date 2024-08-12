@@ -6,7 +6,8 @@ const Squema = mongoose.Schema;
 const usuarioSquema = new Squema({
     nombre: {type: String, required: true},
     email: {type: String, required: true},
-    contrasena: {type: String, required: true}
+    contrasena: {type: String, required: true},
+    foto: {type: String, required: true}
 });
 
 usuarioSquema.pre('save', async function(next) {

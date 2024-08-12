@@ -2,8 +2,10 @@ import UsuarioService from '../services/usuario.service.js';
 
 const postUsuario = async (req, res) => {
     try {
-        const {nombre, email, contrasena} = req.body;
-        const usuario = await UsuarioService.postUsuario(nombre, email, contrasena);
+        const {nombre, email, contrasena, foto} = req.body;
+        const fotoPath = `icons/${foto}`;
+        const usuario = await UsuarioService.postUsuario(nombre, email, contrasena, fotoPath);
+        console.log(usuario);
         res.status(201).json(usuario);
     } catch (error) {
         res.status(400).json({error: error.message});

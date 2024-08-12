@@ -1,7 +1,7 @@
 import UsuarioSquema from "../models/usuario.model.js";
 
-const postUsuario = async (nombre, email, contrasena) => {
-    const usuario = new UsuarioSquema({nombre, email, contrasena});
+const postUsuario = async (nombre, email, contrasena, foto) => {
+    const usuario = new UsuarioSquema({nombre, email, contrasena, foto});
     return await usuario.save();
 }
 
@@ -10,4 +10,4 @@ const getUsuario = async () => {
     return usuario;
 }
 
-export default {postUsuario}
+export default {postUsuario, getUsuario}
