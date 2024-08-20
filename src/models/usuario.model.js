@@ -19,9 +19,9 @@ const TableroSchema = new Schema({
 });
 
 // Definición de EspacioSchema
-const EspacioSchema = new Schema({
-    tableros: { type: [TableroSchema], default: [] }
-});
+//const EspacioSchema = new Schema({
+//    tableros: { type: [TableroSchema], default: [] }
+//});
 
 // Definición de MiembrosSchema
 const MiembrosSchema = new Schema({
@@ -42,7 +42,7 @@ const usuarioSchema = new Schema({
     email: { type: String, required: true },
     contrasena: { type: String, required: true },
     foto: { type: String, required: true },
-    espacio: { type: EspacioSchema },
+    espacio: { type: [TableroSchema], default: [] },
     equipos: { type: [EquipoSchema], default: [] }
 });
 
