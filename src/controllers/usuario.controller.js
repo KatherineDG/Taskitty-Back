@@ -21,4 +21,36 @@ const getUsuario = async (req, res) => {
     }
 };
 
-export {postUsuario, getUsuario};
+const postTableroEspacioUsuario = async (req, res) => {
+    try {
+        const {id} = req.params;
+        const tablero = req.body;
+        const usuario = await UsuarioService.postTableroEspacioUsuario(id, tablero);
+        res.status(201).json(usuario);
+    } catch (error) {
+        res.status(400).json({error: error.message});
+    }
+}
+
+const getTablerosEspacioUsuario = async (req, res) => {
+    try {
+        const {id} = req.params;
+        const tableros = await UsuarioService.getTablerosEspacioUsuario(id);
+        res.status(200).json(tableros);
+    } catch (error) {
+        res.status(400).json({error: error.message});
+    }
+}
+
+const getTablerosEquipoUsuario = async (req, res) => {
+    try {
+        const {id} = req.params;
+        const tableros = await UsuarioService.getTablerosEquipoUsuario(id);
+        res.status(200).json(tableros);
+    } catch (error) {
+        res.status(400).json({error: error.message});
+    }
+}
+
+
+export {postUsuario, getUsuario, getTablerosEspacioUsuario, getTablerosEquipoUsuario};
