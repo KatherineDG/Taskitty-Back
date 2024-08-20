@@ -1,4 +1,4 @@
-import UsuarioSchema from "../models/usuario.model";
+import UsuarioSchema from "../models/usuario.model.js";
 
 //la tarea se crea en el Hacer
 const postTarea = async (idUsuario, esEquipo, nombreEspacio, nombreEquipo, nombreTablero, nombreTarea, descripcion, dificultad, miembrosCargo) => {

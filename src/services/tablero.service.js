@@ -1,4 +1,4 @@
-import UsuarioSchema from '../models/usuario.model';
+import UsuarioSchema from '../models/usuario.model.js';
 
 const postTablero = async (idUsuario, esEquipo, nombreEquipo, nombreTablero) => {
     const usuario = await UsuarioSchema.findById(idUsuario);

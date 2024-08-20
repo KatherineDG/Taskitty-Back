@@ -1,4 +1,4 @@
-import TableroService from '../services/tablero.service';
+import TableroService from '../services/tablero.service.js';
 
 const postTablero = async (req, res) => {
     const { idUsuario, esEquipo, nombreEquipo, nombreTablero } = req.body;
@@ -20,4 +20,4 @@ const getTableros = async (req, res) => {
     }
 }
 
-export default { postTablero, getTableros };
+export { postTablero, getTableros };

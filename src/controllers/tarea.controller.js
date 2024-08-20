@@ -1,4 +1,4 @@
-import TareaService from '../services/tarea.service';
+import TareaService from '../services/tarea.service.js';
 
 const postTarea = async (req, res) => {
     const {idUsuario, esEquipo, nombreEspacio, nombreEquipo, nombreTablero, nombreTarea, descripcion, dificultad, miembrosCargo} = req.body;
@@ -20,4 +20,4 @@ const getTarea = async (req, res) => {
     }
 }
 
-export default {postTarea, getTarea};
+export {postTarea, getTarea};

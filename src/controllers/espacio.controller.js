@@ -1,4 +1,4 @@
-import EspacioService from '../services/espacio.services';
+import EspacioService from '../services/espacio.service.js';
 
 const postEspacio = async (req, res) => {
     try {
@@ -20,4 +20,4 @@ const getEspacios = async (req, res) => {
     }
 }
 
-export default { postEspacio, getEspacios };
+export { postEspacio, getEspacios };

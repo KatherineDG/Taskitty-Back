@@ -1,8 +1,9 @@
-import {postEspacio, getEspacio} from '../controllers/espacio.controllers';
+import {postEspacio, getEspacios} from '../controllers/espacio.controller.js';
+import express from 'express';
 
-const router = require('express').Router();
+const router = express.Router();
 
 router.post('/postEspacio', postEspacio);
-router.get('/getEspacio', getEspacio);
+router.get('/getEspacio', getEspacios);
 
 export default router;
