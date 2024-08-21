@@ -1,8 +1,8 @@
 import UsuarioSchema from "../models/usuario.model.js";
 
-const postEquipo = async (idUsuario, nombreEquipo) => {
+const postEquipo = async (idUsuario, nombreEquipo, invitados) => {
     const usuario = await UsuarioSchema.findById(idUsuario);
-    const equipo = { nombre: nombreEquipo, tableros: [], miembros: { administradores: [idUsuario], invitados: [] } };
+    const equipo = { nombre: nombreEquipo, tableros: [], miembros: { administradores: [idUsuario], invitados: invitados } };
     usuario.equipos.push(equipo);
     await usuario.save();
 }

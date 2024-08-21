@@ -1,9 +1,11 @@
-import {postTablero, getTableros} from '../controllers/tablero.controller.js';
+import {postTableroEquipo, postTableroEspacio, getTablerosEquipo, getTablerosEspacio} from '../controllers/tablero.controller.js';
 import express from 'express';
 
 const router = express.Router();
 
-router.post('/postTablero', postTablero);
-router.get('/getTableros', getTableros);
+router.post('/postTableroEquipo', postTableroEquipo);
+router.get('/getTablerosEquipo', getTablerosEquipo);
+router.post('/postTableroEspacio', postTableroEspacio);
+router.get('/getTablerosEspacio', getTablerosEspacio);
 
 export default router;  

@@ -26,7 +26,7 @@ const TableroSchema = new Schema({
 // Definición de MiembrosSchema
 const MiembrosSchema = new Schema({
     administradores: { type: [Schema.Types.ObjectId], ref: 'Usuario', required: true },
-    invitados: { type: [Schema.Types.ObjectId], ref: 'Usuario', required: true }
+    invitados: { type: [Schema.Types.ObjectId], ref: 'Usuario', default: [], required: true }
 });
 
 // Definición de EquipoSchema

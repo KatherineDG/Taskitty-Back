@@ -1,9 +1,11 @@
-import {postTarea, getTarea} from '../controllers/tarea.controller.js';
+import {postTareaEquipo, postTareaEspacio, getTareaEquipo, getTareaEspacio} from '../controllers/tarea.controller.js';
 import express from 'express';
 
 const router = express.Router();
 
-router.post('/postTarea', postTarea);
-router.post('/getTarea', getTarea);
+router.post('/postTareaEquipo', postTareaEquipo);
+router.get('/getTareaEquipo', getTareaEquipo);
+router.post('/postTareaEspacio', postTareaEspacio);
+router.get('/getTareaEspacio', getTareaEspacio);
 
 export default router;

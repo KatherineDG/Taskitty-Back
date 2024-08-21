@@ -1,9 +1,9 @@
 import EquipoService from '../services/equipo.service.js';
 
 const postEquipo = async (req, res) => {
-    const {idUsuario, nombreEquipo} = req.body;
+    const {idUsuario, nombreEquipo, invitados} = req.body;
     try {
-        await EquipoService.postEquipo(idUsuario, nombreEquipo);
+        await EquipoService.postEquipo(idUsuario, nombreEquipo, invitados);
         res.status(201).send();
     } catch (error) {
         res.status

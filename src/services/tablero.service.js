@@ -1,33 +1,31 @@
 import UsuarioSchema from '../models/usuario.model.js';
 
-const postTablero = async (idUsuario, esEquipo, nombreEquipo, nombreTablero) => {
-    //console.log(typeof esEquipo);
+const postTableroEquipo = async (idUsuario, nombreEquipo, nombreTablero) => {
     const usuario = await UsuarioSchema.findById(idUsuario);
-    //console.log(usuario);
     const tablero = { nombre: nombreTablero };
-    if (esEquipo){
-        console.log('es equipo');
-        const equipo = usuario.equipos.find(equipo => equipo.nombre === nombreEquipo);
-        console.log(equipo);
-        equipo.tableros.push(tablero);
-        console.log(equipo);
-        await usuario.save();
-    } else {
-        const espacio = usuario.espacio;
-        espacio.tableros.push(tablero);
-        await usuario.save();
-    }
+    const equipo = usuario.equipos.find(equipo => equipo.nombre === nombreEquipo);
+    equipo.tableros.push(tablero);
+    await usuario.save();
 }
 
-const getTableros = async (idUsuario, esEquipo) => {
+const postTableroEspacio = async (idUsuario, nombreTablero) => {
     const usuario = await UsuarioSchema.findById(idUsuario);
-    if (esEquipo){
-        const equipo = usuario.equipos.find(equipo => equipo)
-        return equipo.tableros;
-    } else {
-        const espacio = usuario.espacio;
-        return espacio.tableros;
-    }
+    const tablero = { nombre: nombreTablero };
+    const espacio = usuario.espacio;
+    espacio.push(tablero);
+    await usuario.save();
 }
 
-export default { postTablero, getTableros };
+const getTablerosEquipo = async (idUsuario, nombreEquipo) => {
+    const usuario = await UsuarioSchema.findById(idUsuario);
+    const equipo = usuario.equipos.find(equipo => equipo.nombre === nombreEquipo);
+    return equipo.tableros;
+}
+
+const getTablerosEspacio = async (idUsuario) => {
+    const usuario = await UsuarioSchema.findById(idUsuario);
+    const espacio = usuario.espacio;
+    return espacio.tableros;
+}
+
+export default { postTableroEquipo, postTableroEspacio, getTablerosEquipo, getTablerosEspacio };

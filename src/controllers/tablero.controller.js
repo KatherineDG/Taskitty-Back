@@ -1,23 +1,44 @@
 import TableroService from '../services/tablero.service.js';
 
-const postTablero = async (req, res) => {
-    const { idUsuario, esEquipo, nombreEquipo, nombreTablero } = req.body;
+const postTableroEquipo = async (req, res) => {
+    const { idUsuario, nombreEquipo, nombreTablero } = req.body;
     try {
-        await TableroService.postTablero(idUsuario, esEquipo, nombreEquipo, nombreTablero);
+        await TableroService.postTableroEquipo(idUsuario, nombreEquipo, nombreTablero);
         return res.status(201).json({ message: 'Tablero creado' });
     } catch (error) {
         return res.status(500).json({ message: error.message });
     }
 }
 
-const getTableros = async (req, res) => {
-    const { idUsuario, esEquipo } = req.body;
+const postTableroEspacio = async (req, res) => {
+    const { idUsuario, nombreTablero } = req.body;
     try {
-        const tableros = await TableroService.getTableros(idUsuario, esEquipo);
+        await TableroService.postTableroEspacio(idUsuario, nombreTablero);
+        return res.status(201).json({ message: 'Tablero creado' });
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
+    }
+}
+
+const getTablerosEquipo = async (req, res) => {
+    const { idUsuario, nombreEquipo } = req.body;
+    try {
+        const tableros = await TableroService.getTablerosEquipo(idUsuario, nombreEquipo);
         return res.status(200).json(tableros);
     } catch (error) {
         return res.status(500).json({ message: error.message });
     }
 }
 
-export { postTablero, getTableros };
+const getTablerosEspacio = async (req, res) => {
+    const { idUsuario } = req.body;
+    try {
+        const tableros = await TableroService.getTablerosEspacio(idUsuario);
+        return res.status(200).json(tableros);
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
+    }
+}
+
+
+export { postTableroEquipo, postTableroEspacio, getTablerosEquipo, getTablerosEspacio };
