@@ -45,17 +45,22 @@ const InvitacionSchema = new Schema({
 const usuarioSchema = new Schema({
     nombre: { type: String, required: true },
     email: { type: String, required: true },
-    contrasena: { type: String, required: true },
+    contrasena: { type: String, required: false }, // Cambiado a false
     foto: { type: String, required: true },
     espacio: { type: [TableroSchema], default: [] },
     equipos: { type: [EquipoSchema], default: [] },
-    invitaciones: { type: [InvitacionSchema], default: [] }
+    invitaciones: { type: [InvitacionSchema], default: [] },
+    googleId: { type: String, required: false } // Agrega este campo para almacenar el ID de Google
 });
+
+
+
 
 // Middleware para hashear la contraseña antes de guardar
 usuarioSchema.pre('save', async function(next) {
     const usuario = this;
-    if (usuario.isModified('contrasena') || usuario.isNew) {
+    // Solo intentar hashear la contraseña si existe
+    if (usuario.isModified('contrasena') && usuario.contrasena) {
         const salt = await bcryptjs.genSalt(10);
         usuario.contrasena = await bcryptjs.hash(usuario.contrasena, salt);
     }
