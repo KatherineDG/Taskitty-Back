@@ -36,6 +36,11 @@ const EquipoSchema = new Schema({
     miembros: { type: MiembrosSchema, default: () => ({}) }
 });
 
+const InvitacionSchema = new Schema({
+    emisor: { type: Schema.Types.ObjectId, ref: 'Usuario', required: true },
+    equipo: { type: Schema.Types.ObjectId, ref: 'Equipo', required: true }
+});
+
 // Definición de usuarioSchema
 const usuarioSchema = new Schema({
     nombre: { type: String, required: true },
@@ -43,7 +48,8 @@ const usuarioSchema = new Schema({
     contrasena: { type: String, required: true },
     foto: { type: String, required: true },
     espacio: { type: [TableroSchema], default: [] },
-    equipos: { type: [EquipoSchema], default: [] }
+    equipos: { type: [EquipoSchema], default: [] },
+    invitaciones: { type: [InvitacionSchema], default: [] }
 });
 
 // Middleware para hashear la contraseña antes de guardar
@@ -57,4 +63,5 @@ usuarioSchema.pre('save', async function(next) {
 });
 
 const Usuario = mongoose.model('Usuario', usuarioSchema, 'usuarios');
+const Equipo = mongoose.model('Equipo', EquipoSchema, 'usuarios');
 export default Usuario;
