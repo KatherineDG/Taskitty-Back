@@ -5,8 +5,8 @@ const postUsuario = async (nombre, email, contrasena, foto) => {
     return await usuario.save();
 }
 
-const getUsuario = async () => {
-    const usuario = await UsuarioSchema.find();
+const getUsuario = async (idUsuario) => {
+    const usuario = await UsuarioSchema.findById(idUsuario);
     return usuario;
 }
 

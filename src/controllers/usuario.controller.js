@@ -13,8 +13,9 @@ const postUsuario = async (req, res) => {
 };
 
 const getUsuario = async (req, res) => {
+    const {idUsuario} = req.params;
     try {
-        const usuario = await UsuarioService.getUsuario();
+        const usuario = await UsuarioService.getUsuario(idUsuario);
         res.status(200).json(usuario);
     } catch (error) {
         res.status(400).json({error: error.message});

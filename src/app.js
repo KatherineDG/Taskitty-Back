@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 import passport from 'passport';
 import session from 'express-session';
+import cors from 'cors'; 
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 import Usuario from './models/usuario.model.js';
 
@@ -17,12 +18,17 @@ const app = express();
 
 app.use(express.json());
 
+app.use(cors({
+  origin: 'http://localhost:3000',
+}));
+
 // Configurar express-session
 app.use(session({
     secret: 'your_secret_key',
     resave: false,
     saveUninitialized: true,
   }));
+
 
   // Inicializar passport y la sesión
 app.use(passport.initialize());
@@ -32,7 +38,7 @@ app.use(passport.session());
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: "http://localhost:3000/auth/google/callback"
+    callbackURL: "http://localhost:5000/auth/google/callback"
   },
   async (accessToken, refreshToken, profile, done) => {
     try {
@@ -78,7 +84,7 @@ passport.serializeUser((usuario, done) => {
     passport.authenticate('google', { failureRedirect: '/' }),
     (req, res) => {
       // Autenticación exitosa, redirigir al usuario a la página principal
-      res.redirect('/');
+      res.redirect(`http://localhost:3000/home-espacios?userId=${req.user.id}`);
     }
   );
   
