@@ -22,36 +22,16 @@ const getUsuario = async (req, res) => {
     }
 };
 
-const postTableroEspacioUsuario = async (req, res) => {
+const loginUsuario = async (req, res) => {
+    const {nombre, contrasena} = req.body;
     try {
-        const {id} = req.params;
-        const tablero = req.body;
-        const usuario = await UsuarioService.postTableroEspacioUsuario(id, tablero);
-        res.status(201).json(usuario);
-    } catch (error) {
-        res.status(400).json({error: error.message});
+        const usuario = await UsuarioService.loginUsuario(nombre, contrasena);
+        res.status(200).json(usuario);
     }
-}
-
-const getTablerosEspacioUsuario = async (req, res) => {
-    try {
-        const {id} = req.params;
-        const tableros = await UsuarioService.getTablerosEspacioUsuario(id);
-        res.status(200).json(tableros);
-    } catch (error) {
-        res.status(400).json({error: error.message});
-    }
-}
-
-const getTablerosEquipoUsuario = async (req, res) => {
-    try {
-        const {id} = req.params;
-        const tableros = await UsuarioService.getTablerosEquipoUsuario(id);
-        res.status(200).json(tableros);
-    } catch (error) {
+    catch (error) {
         res.status(400).json({error: error.message});
     }
 }
 
 
-export {postUsuario, getUsuario, getTablerosEspacioUsuario, getTablerosEquipoUsuario};
+export {postUsuario, getUsuario, loginUsuario};

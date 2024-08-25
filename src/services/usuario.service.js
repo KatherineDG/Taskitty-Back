@@ -1,4 +1,5 @@
 import UsuarioSchema from "../models/usuario.model.js";
+import bcrypt from 'bcryptjs';
 
 const postUsuario = async (nombre, email, contrasena, foto) => {
     const usuario = new UsuarioSchema({nombre, email, contrasena, foto});
@@ -10,21 +11,17 @@ const getUsuario = async (idUsuario) => {
     return usuario;
 }
 
-const postTableroEspacioUsuario = async (id, tablero) => {
-    const usuario = await UsuarioSchema.findById(id);
-    usuario.espacio.tableros.push(tablero);
-    return await usuario.save();
+const loginUsuario = async (nombre, contrasena) => {
+    const usuario = await UsuarioSchema.findOne({nombre});
+    if (!usuario) {
+        throw new Error('Usuario no encontrado');
+    }
+    const esContrasenaValida = await bcrypt.compare(contrasena, usuario.contrasena);
+
+    if (!esContrasenaValida) {
+        throw new Error('Contraseña incorrecta');
+    }
+    return usuario;
 }
 
-const getTablerosEspacioUsuario = async (id) => {
-    const usuario = await UsuarioSchema.findById(id);
-    return usuario.espacio;
-}
-
-const getTablerosEquipoUsuario = async (id) => {
-    const usuario = await UsuarioSchema.findById(id);
-    return usuario.equipos;
-}
-
-
-export default {postUsuario, getUsuario, postTableroEspacioUsuario, getTablerosEspacioUsuario, getTablerosEquipoUsuario};
+export default {postUsuario, getUsuario, loginUsuario};
