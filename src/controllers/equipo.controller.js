@@ -2,6 +2,7 @@ import EquipoService from '../services/equipo.service.js';
 
 const postEquipo = async (req, res) => {
     const {idUsuario, nombreEquipo, invitados} = req.body;
+    console.log(idUsuario, nombreEquipo, invitados);
     try {
         await EquipoService.postEquipo(idUsuario, nombreEquipo, invitados);
         return res.status(201).json({ message: 'Equipo creado' });

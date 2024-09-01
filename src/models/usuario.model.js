@@ -23,10 +23,15 @@ const TableroSchema = new Schema({
 //    tableros: { type: [TableroSchema], default: [] }
 //});
 
+const MiembroSchema = new Schema({
+    id: { type: Schema.Types.ObjectId, ref: 'Usuario', required: true },
+    nombre: { type: String, required: true }
+});
+
 // Definición de MiembrosSchema
 const MiembrosSchema = new Schema({
-    administradores: { type: [Schema.Types.ObjectId], ref: 'Usuario', required: true },
-    invitados: { type: [Schema.Types.ObjectId], ref: 'Usuario', default: [], required: true }
+    administradores: { type: [MiembroSchema], required: true },
+    invitados: { type: [MiembroSchema], default: [] }
 });
 
 // Definición de EquipoSchema

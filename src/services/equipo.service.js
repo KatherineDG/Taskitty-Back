@@ -13,9 +13,12 @@ const enviarNotificacionInvitacionEquipo = async (idEmisor, idEquipo, invitados,
 
 const postEquipo = async (idUsuario, nombreEquipo, invitados) => {
     const usuario = await UsuarioSchema.findById(idUsuario);
-    const equipo = { nombre: nombreEquipo, tableros: [], miembros: { administradores: [idUsuario], invitados: [] } };
+    const miembroAdministrador = { id: idUsuario, nombre: usuario.nombre };
+    const equipo = { nombre: nombreEquipo, tableros: [], miembros: { administradores: [miembroAdministrador], invitados: [] } };
     usuario.equipos.push(equipo);
     await usuario.save();
+
+    console.log(usuario)
 
     const idEquipo = usuario.equipos.find(equipo => equipo.nombre === nombreEquipo)._id;
     enviarNotificacionInvitacionEquipo(idUsuario, idEquipo, invitados, nombreEquipo);
@@ -33,7 +36,8 @@ const aceptarInvitacionEquipo = async (idUsuarioInvitado, idUsuarioEmisor, idEqu
     //agrego al invitado al equipo
     const equipo = usuarioEmisor.equipos.find(equipo => equipo._id.toString() === idEquipo);
     console.log(equipo);
-    equipo.miembros.invitados.push(usuarioInvitado);
+    const miembroInvitado = { id: idUsuarioInvitado, nombre: usuarioInvitado.nombre };
+    equipo.miembros.invitados.push(miembroInvitado);
     usuarioInvitado.equipos.push(equipo);
 
     //elimino la invitacion del invitado
