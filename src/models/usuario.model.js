@@ -38,7 +38,9 @@ const EquipoSchema = new Schema({
 
 const InvitacionSchema = new Schema({
     emisor: { type: Schema.Types.ObjectId, ref: 'Usuario', required: true },
-    equipo: { type: Schema.Types.ObjectId, ref: 'Equipo', required: true }
+    nombreEmisor: { type: String, required: true },
+    equipo: { type: Schema.Types.ObjectId, ref: 'Equipo', required: true },
+    nombreEquipo: { type: String, required: true }
 });
 
 // Definición de usuarioSchema
