@@ -6,7 +6,7 @@ const postUsuario = async (req, res) => {
         const fotoPath = `icons/${foto}`;
         const usuario = await UsuarioService.postUsuario(nombre, email, contrasena, fotoPath);
         console.log(usuario);
-        res.status(201).json(usuario);
+        return res.status(201).json(usuario);
     } catch (error) {
         res.status(400).json({error: error.message});
     }
